@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spin Tim Futsal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>🎯 Spin Tim Futsal</h1>
+      <button id="themeToggle">🌙/☀️</button>
+    </header>
+
+    <section class="input-section">
+      <textarea id="playerInput" placeholder="Masukkan 10 nama pemain, satu per baris..."></textarea>
+      <div class="buttons">
+        <button onclick="startSpin()">Mulai Spin</button>
+        <button onclick="resetAll()">Reset</button>
+      </div>
+    </section>
+
+    <div class="wheel-wrapper">
+      <div class="arrow"></div>
+      <canvas id="wheelCanvas" width="400" height="400"></canvas>
+    </div>
+
+    <section class="teams">
+      <div class="team-card">
+        <h2>⚽ Tim A</h2>
+        <ul id="teamA"></ul>
+      </div>
+      <div class="team-card">
+        <h2>🏆 Tim B</h2>
+        <ul id="teamB"></ul>
+      </div>
+    </section>
+
+    <footer>
+      <button id="installButton" hidden>📥 Unduh Aplikasi</button>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

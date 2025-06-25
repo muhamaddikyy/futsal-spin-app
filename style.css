@@ -1,0 +1,161 @@
+body {
+  margin: 0;
+  font-family: 'Fredoka', sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+:root {
+  --bg-light: #f0f0f0;
+  --bg-dark: #1e1e2f;
+  --text-light: #333;
+  --text-dark: #f0f0f0;
+  --primary: #ff6b6b;
+  --secondary: #4ecdc4;
+  --accent: #ffe66d;
+}
+
+body.light {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+}
+
+body.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.app {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: var(--primary);
+}
+
+#themeToggle {
+  font-size: 1.2em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.input-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 10px;
+  border: 2px dashed var(--secondary);
+  resize: none;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+button {
+  font-family: 'Fredoka', sans-serif;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--accent);
+  color: black;
+}
+
+.wheel-wrapper {
+  position: relative;
+  margin: 40px auto;
+  width: 400px;
+  height: 400px;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 30px solid var(--primary);
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+canvas {
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  background: white;
+}
+
+.teams {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.team-card {
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 10px;
+  flex: 1 1 40%;
+  max-width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 5px;
+  font-size: 1.2em;
+  border-bottom: 1px dashed #ccc;
+}
+
+footer {
+  text-align: center;
+  margin-top: 30px;
+}
+
+@media (max-width: 600px) {
+  .teams {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wheel-wrapper {
+    width: 100%;
+    height: auto;
+  }
+
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
