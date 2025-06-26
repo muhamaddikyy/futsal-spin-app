@@ -3,60 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spin Tim Futsal</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#121212" />
   <link rel="manifest" href="manifest.json" />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Spin Tim Futsal</title>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
-<body>
-  <div class="app">
-    <header>
-      <h1>🎯 Spin Tim Futsal</h1>
-      <button id="themeToggle">🌙/☀️</button>
-    </header>
+<body class="light">
+  <header>
+    <h1>🎯 Spin Tim Futsal</h1>
+    <button id="themeToggle">🌓</button>
+  </header>
 
-    <section class="input-section">
-      <textarea id="playerInput" placeholder="Masukkan 10 nama pemain, satu per baris..."></textarea>
-      <div class="buttons">
-        <button onclick="startSpin()">Mulai Spin</button>
-        <button onclick="resetAll()">Reset</button>
-      </div>
-    </section>
-
-    <div class="wheel-wrapper">
-      <div class="arrow"></div>
-      <canvas id="wheelCanvas" width="400" height="400"></canvas>
+  <main>
+    <textarea id="playerInput" rows="10" placeholder="Masukkan 10 nama pemain (1 per baris)"></textarea>
+    <div class="buttons">
+      <button onclick="startSpin()">🎡 Mulai Spin</button>
+      <button onclick="shuffleTeams()">🔀 Acak Ulang Tim</button>
+      <button onclick="saveImage()">📷 Simpan Hasil</button>
+      <button onclick="resetAll()">♻️ Reset</button>
     </div>
 
-    <section class="teams">
-      <div class="team-card">
-        <h2>⚽ Tim A</h2>
+    <div id="spinContainer">
+      <canvas id="wheelCanvas" width="300" height="300"></canvas>
+      <div class="arrow">▲</div>
+      <canvas id="confettiCanvas" class="confetti"></canvas>
+    </div>
+    <div id="spinResult"></div>
+
+    <section id="teams">
+      <div class="team-box" id="teamABox">
+        <h2>Tim A</h2>
+        <input type="color" id="colorTeamA" value="#00bcd4">
         <ul id="teamA"></ul>
       </div>
-      <div class="team-card">
-        <h2>🏆 Tim B</h2>
+      <div class="team-box" id="teamBBox">
+        <h2>Tim B</h2>
+        <input type="color" id="colorTeamB" value="#ff9800">
         <ul id="teamB"></ul>
       </div>
     </section>
+  </main>
 
-    <footer>
-      <button id="installButton" hidden>📥 Unduh Aplikasi</button>
-      <p class="credit">
-        Created by <strong>mhmddikyy</strong><br/>
-        <a href="https://www.instagram.com/mhmddikyy_?igsh=dDJ4emJlZXN4OXpp" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" style="vertical-align:middle;"> Instagram
-        </a> |
-        <a href="https://www.tiktok.com/@mhmddikyy_?_t=ZS-8xVsLXSqIAW&_r=1" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/24/3046/3046121.png" alt="TikTok" style="vertical-align:middle;"> TikTok
-        </a> |
-        <a href="https://wa.me/6287759311421" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp" style="vertical-align:middle;"> WhatsApp
-        </a>
-      </p>
-    </footer>
-  </div>
-
-  <div class="watermark">mhmddikyy</div>
+  <footer>
+    <p>Created by <strong>mhmddikyy</strong></p>
+    <div class="sosmed">
+      <a href="https://www.instagram.com/mhmddikyy_?igsh=dDJ4emJlZXN4OXpp" target="_blank"><img src="icons/ig.svg" alt="Instagram"></a>
+      <a href="https://www.tiktok.com/@mhmddikyy_?_t=ZS-8xVsLXSqIAW&_r=1" target="_blank"><img src="icons/tiktok.svg" alt="Tiktok"></a>
+      <a href="https://wa.me/6287759311421" target="_blank"><img src="icons/wa.svg" alt="WhatsApp"></a>
+    </div>
+    <button id="installButton" hidden>📲 Install Aplikasi</button>
+  </footer>
 
   <script src="app.js"></script>
 </body>

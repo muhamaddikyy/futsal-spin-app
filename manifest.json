@@ -1,10 +1,11 @@
 {
   "name": "Spin Tim Futsal",
-  "short_name": "SpinFutsal",
+  "short_name": "Futsal Spin",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ff6b6b",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "description": "Aplikasi spin wheel untuk membagi tim futsal secara acak (5 vs 5)",
   "icons": [
     {
       "src": "icons/icon-192.png",

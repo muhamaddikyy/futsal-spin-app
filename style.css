@@ -1,175 +1,177 @@
 body {
   margin: 0;
   font-family: 'Fredoka', sans-serif;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-:root {
-  --bg-light: #f0f0f0;
-  --bg-dark: #1e1e2f;
-  --text-light: #333;
-  --text-dark: #f0f0f0;
-  --primary: #ff6b6b;
-  --secondary: #4ecdc4;
-  --accent: #ffe66d;
-}
-
-body.light {
-  background-color: var(--bg-light);
-  color: var(--text-light);
+  background-color: #f4f4f4;
+  color: #222;
+  transition: background 0.3s, color 0.3s;
 }
 
 body.dark {
-  background-color: var(--bg-dark);
-  color: var(--text-dark);
-}
-
-.app {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
+  background-color: #121212;
+  color: #fff;
 }
 
 header {
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #2196f3;
+  color: white;
 }
 
 h1 {
-  font-size: 2.5em;
-  color: var(--primary);
-}
-
-#themeToggle {
-  font-size: 1.2em;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: inherit;
-}
-
-.input-section {
-  margin-top: 20px;
-  text-align: center;
+  font-size: 1.5rem;
 }
 
 textarea {
-  width: 100%;
-  height: 150px;
-  padding: 10px;
-  font-size: 1em;
+  width: 90%;
+  margin: 1rem auto;
+  display: block;
+  padding: 1rem;
   border-radius: 10px;
-  border: 2px dashed var(--secondary);
+  border: none;
   resize: none;
+  font-size: 1rem;
+  background: #fff;
+  color: #000;
+}
+
+body.dark textarea {
+  background: #2a2a2a;
+  color: #fff;
 }
 
 .buttons {
-  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 button {
-  font-family: 'Fredoka', sans-serif;
-  background-color: var(--primary);
-  color: white;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
   border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 15px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  background: #4caf50;
+  color: white;
+  transition: background 0.3s;
 }
 
 button:hover {
-  background-color: var(--accent);
-  color: black;
+  background: #388e3c;
 }
 
-.wheel-wrapper {
-  position: relative;
-  margin: 40px auto;
-  width: 400px;
-  height: 400px;
+#wheelCanvas {
+  border: 6px solid #333;
+  border-radius: 50%;
+  display: block;
+  margin: 1rem auto;
+  background: #fafafa;
 }
 
 .arrow {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 30px solid var(--primary);
   position: absolute;
-  top: -20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
+  top: 220px;
+  font-size: 2rem;
+  color: red;
 }
 
-canvas {
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  background: white;
+#spinResult {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.teams {
+#spinResult.show {
+  opacity: 1;
+}
+
+#teams {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  margin: 2rem auto;
+  max-width: 700px;
 }
 
-.team-card {
-  background-color: rgba(0,0,0,0.05);
-  border-radius: 20px;
-  padding: 20px;
-  margin: 10px;
-  flex: 1 1 40%;
-  max-width: 300px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+.team-box {
+  width: 45%;
+  background: #e0e0e0;
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-ul {
+.team-box ul {
   list-style: none;
   padding: 0;
 }
 
-li {
-  padding: 5px;
-  font-size: 1.2em;
-  border-bottom: 1px dashed #ccc;
+.team-box li {
+  padding: 0.3rem 0;
+  font-size: 1.1rem;
+}
+
+.team-box input[type="color"] {
+  margin-bottom: 0.5rem;
+  width: 100%;
+  height: 2rem;
+  border: none;
 }
 
 footer {
   text-align: center;
-  margin-top: 30px;
+  padding: 1rem;
+  background: #eee;
+  margin-top: 2rem;
+  font-size: 0.9rem;
 }
 
-.credit {
-  font-size: 0.9em;
-  color: gray;
-  margin-top: 10px;
+footer strong {
+  color: #2196f3;
 }
 
-.watermark {
+footer .sosmed {
+  margin-top: 0.5rem;
+}
+
+footer .sosmed a img {
+  width: 28px;
+  margin: 0 5px;
+  vertical-align: middle;
+}
+
+.confetti {
   position: fixed;
-  bottom: 10px;
-  right: 15px;
-  font-size: 0.75em;
-  opacity: 0.3;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
 }
 
-@media (max-width: 600px) {
-  .teams {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .wheel-wrapper {
+@media screen and (max-width: 600px) {
+  .team-box {
     width: 100%;
-    height: auto;
+    margin-bottom: 1rem;
   }
+}
 
-  canvas {
-    width: 100% !important;
-    height: auto !important;
-  }
+body.dark footer {
+  background: #1a1a1a;
+}
+
+#themeToggle {
+  background: transparent;
+  color: white;
+  font-size: 1.2rem;
 }
