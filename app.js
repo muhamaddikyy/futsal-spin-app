@@ -3,13 +3,20 @@ let players = [];
 let remainingPlayers = [];
 let teamA = [];
 let teamB = [];
+let stats = {};
 const canvas = document.getElementById("wheelCanvas");
 const ctx = canvas.getContext("2d");
 const playerInput = document.getElementById("playerInput");
 const installBtn = document.getElementById("installButton");
+const resultBox = document.getElementById("spinResult");
+const confettiCanvas = document.getElementById("confettiCanvas");
+const colorTeamA = document.getElementById("colorTeamA");
+const colorTeamB = document.getElementById("colorTeamB");
+const teamABox = document.getElementById("teamABox");
+const teamBBox = document.getElementById("teamBBox");
 let deferredPrompt;
 
-// Auto-load saved players
+// Load saved players
 window.addEventListener("load", () => {
   const saved = localStorage.getItem("players");
   if (saved) {
@@ -33,6 +40,8 @@ function startSpin() {
   remainingPlayers = [...players];
   teamA = [];
   teamB = [];
+  stats = {};
+  resultBox.textContent = "";
 
   spinNext();
 }
@@ -64,17 +73,27 @@ function spinNext() {
 
       if (teamA.length < 5) {
         teamA.push(selected);
+        stats[selected] = stats[selected] ? stats[selected] + 1 : 1;
       } else {
         teamB.push(selected);
+        stats[selected] = stats[selected] ? stats[selected] + 1 : 1;
       }
 
+      showResult(selected);
       updateTeams();
+      triggerConfetti();
 
-      setTimeout(spinNext, 1000);
+      setTimeout(spinNext, 1500);
     }
   }
 
   requestAnimationFrame(animate);
+}
+
+function showResult(name) {
+  resultBox.textContent = `🎉 ${name} terpilih!`;
+  resultBox.classList.add("show");
+  setTimeout(() => resultBox.classList.remove("show"), 2000);
 }
 
 function easeOut(t) {
@@ -110,8 +129,15 @@ function drawWheel() {
 }
 
 function updateTeams() {
-  document.getElementById("teamA").innerHTML = teamA.map(p => `<li>${p}</li>`).join("");
-  document.getElementById("teamB").innerHTML = teamB.map(p => `<li>${p}</li>`).join("");
+  document.getElementById("teamA").innerHTML = teamA.map(p => `<li>${p} <small>x${stats[p] || 0}</small></li>`).join("");
+  document.getElementById("teamB").innerHTML = teamB.map(p => `<li>${p} <small>x${stats[p] || 0}</small></li>`).join("");
+  teamABox.style.backgroundColor = colorTeamA.value;
+  teamBBox.style.backgroundColor = colorTeamB.value;
+}
+
+function triggerConfetti() {
+  if (!confettiCanvas.confetti) confettiCanvas.confetti = window.confetti.create(confettiCanvas, { resize: true });
+  confettiCanvas.confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
 }
 
 function resetAll() {
@@ -121,9 +147,48 @@ function resetAll() {
   remainingPlayers = [];
   teamA = [];
   teamB = [];
+  stats = {};
   drawWheel();
   updateTeams();
+  resultBox.textContent = "";
 }
+
+function shuffleTeams() {
+  const input = playerInput.value.trim().split("\n").map(p => p.trim()).filter(p => p);
+  if (input.length !== 10) {
+    alert("Masukkan tepat 10 nama pemain!");
+    return;
+  }
+  const shuffled = [...input].sort(() => Math.random() - 0.5);
+  teamA = shuffled.slice(0, 5);
+  teamB = shuffled.slice(5);
+  stats = {};
+  teamA.forEach(p => stats[p] = 1);
+  teamB.forEach(p => stats[p] = 1);
+  updateTeams();
+  resultBox.textContent = "Tim diacak ulang!";
+}
+
+function saveImage() {
+  html2canvas(document.getElementById("teams"), { scale: 2 }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "hasil-tim-futsal.png";
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+}
+
+// Theme toggle
+const themeBtn = document.getElementById("themeToggle");
+let currentTheme = localStorage.getItem("theme") || "light";
+document.body.classList.add(currentTheme);
+
+themeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  document.body.classList.toggle("light");
+  const newTheme = document.body.classList.contains("dark") ? "dark" : "light";
+  localStorage.setItem("theme", newTheme);
+});
 
 // PWA Install
 window.addEventListener("beforeinstallprompt", (e) => {
@@ -141,16 +206,4 @@ installBtn.addEventListener("click", async () => {
     }
     deferredPrompt = null;
   }
-});
-
-// Theme toggle
-const themeBtn = document.getElementById("themeToggle");
-let currentTheme = localStorage.getItem("theme") || "light";
-document.body.classList.add(currentTheme);
-
-themeBtn.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  document.body.classList.toggle("light");
-  const newTheme = document.body.classList.contains("dark") ? "dark" : "light";
-  localStorage.setItem("theme", newTheme);
 });
